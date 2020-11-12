@@ -19,7 +19,7 @@ try:
 			print("[!] Connection established.")
 			
 			login_data = dumps({
-				'captcha-key': '',
+				'captcha_key': '',
 				'email': username,
 				'login_source': '',
 				'password': password,
