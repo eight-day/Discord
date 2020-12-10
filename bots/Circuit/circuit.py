@@ -4,13 +4,17 @@
 # Complete in your sleep with just abit of try....
 # Anyways cya nerds
 try:
-	from discord import Client, MessageType
-	from time import ctime, strftime
+	from discord import (
+		Client, 
+		MessageType,
+		Message
+	)
 	from os import (
 		path,   # For file based operations
 		getenv, # If you have your token in an ENV use this. getenv(ENV_NAME)
 		system  # Executing commands
 	)
+	from time import ctime, strftime
 	from getpass import getpass # If you don't supply a token, you should atleast supply the login details.
 except ImportError as Err:
 	print(f"Module not found: {Err.name}, so install it nerd.")
@@ -44,7 +48,7 @@ def write_data(outdata: list, outpath: str, overwrite = False, append = False) -
 		return False
 
 @cbot.event
-async def on_message(message: discord.Message) -> None:
+async def on_message(message: Message) -> None:
 	#Add your own stuff here nerd, don't constantly ask me to.
 	#Understand the base working of it and edit based on that.
 	
@@ -55,7 +59,7 @@ async def on_message(message: discord.Message) -> None:
 		message.embeds,
 		message.attachments
 	)
-	def check(message: discord.Message) -> bool:
+	def check(message: Message) -> bool:
 		return message.author == cbot.user if not sets["others"] else (
 			message.author in sets["allow_others"][1]
 		)
@@ -79,7 +83,7 @@ async def on_message(message: discord.Message) -> None:
 					"overwrite": "--overwrite" in args or "-a" in args,
 					"append": "--append" in args or "-a" in args,
 					"outpath": (
-						f"{channel}-{time.ctime()}.log" if "-o" not in args else (
+						(f"{channel}-{ctime()}.log") if "-o" not in args else (
 							args[args.index("-o") + 1])
 					),
 					"outdata": [] # Uses writelines
@@ -100,7 +104,7 @@ async def on_message(message: discord.Message) -> None:
 			
 if __name__ == "__main__":
 	try:
-		if token == "" or is None:
+		if token == "" or token is None:
 			cbot.login(input("Username: "), getpass("Password"))
 			cbot.run(bot=False)
 		else:
