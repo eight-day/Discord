@@ -106,8 +106,10 @@ async def on_message(message: Message) -> None:
 if __name__ == "__main__":
 	try:
 		if token == "" or token is None:
-			cbot.login(input("Username: "), getpass("Password"))
-			cbot.run(bot=False)
+			cbot.run(
+				input("Username: "),
+				getpass("Password")
+			)
 		else:
 			cbot.run(token, bot=False)
 	except Exception as Err:
