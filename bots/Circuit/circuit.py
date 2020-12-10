@@ -4,12 +4,19 @@
 # Complete in your sleep with just abit of try....
 # Anyways cya nerds
 try:
-	import discord, time, colorama
+	from discord import Client, MessageType
+	from time import ctime, strftime
+	from colorama import Fore
+	from os import (
+		path,   # For file based operations
+		getenv, # If you have your token in an ENV use this. getenv(ENV_NAME)
+		system  # Executing commands
+	)
 except ImportError as Err:
 	print(f"Module not found: {Err.name}, so install it nerd.")
 
 cbot, token, prefix, sets, logs = (
-	discord.Client(),
+	Client(),
 	"YOUR DISCORD TOKEN HERE NERD",
 	"!c ",
 	{
@@ -26,6 +33,16 @@ cbot, token, prefix, sets, logs = (
 	}
 )
 
+def write_data(outdata: list, outpath: str, overwrite = False, append = False) -> bool:
+	try:
+		if path.isfile(outpath) and overwrite: desc = open(outpath, "w")
+		elif path.isfile(outpath) and append: desc = open(outpath, "a")
+		else: desc = open(outpath, "w")
+		desc.writelines(outdata)
+		return True
+	except:
+		return False
+
 @cbot.event
 async def on_message(message: discord.Message) -> None:
 	#Add your own stuff here nerd, don't constantly ask me to.
@@ -39,17 +56,15 @@ async def on_message(message: discord.Message) -> None:
 		message.attachments
 	)
 	def check(message: discord.Message) -> bool:
-		if not sets["allow_others"]:
-			return True if (message.author == cbot.user) else False
-		else:
-			return True
+		return message.author == cbot.user if not sets["others"] else (
+			message.author in sets["allow_others"][1]
+		)
 	
 	if content.startswith(prefix):
 		if ( not sets["allow_others"] and not check(message) ): return
 		if author not in sets["allow_others"][1]: return
 		
 		# Yes, I could've one lined the above, but it looked bad.
-		await message.delete()
 		command, *args = content.strip(prefix).split()
 		if command == "purge":
 			limit = int(args[0]) if args.__len__ >= 1 and args[0].isdigit() else None
@@ -57,5 +72,35 @@ async def on_message(message: discord.Message) -> None:
 				if check(msg):
 					try: await msg.delete()
 					except: continue
+			await message.delete()
 		if command == "logs":
-			if args.__len__ != 
+			try:
+				arguments = {
+					"overwrite": "--overwrite" in args or "-a" in args,
+					"append": "--append" in args or "-a" in args,
+					"outpath": (
+						f"{channel}-{time.ctime()}.log" if "-o" not in args else (
+							args[args.index("-o") + 1])
+					),
+					"outdata": [] # Uses writelines
+				}
+				await message.delete()
+			except IndexError:
+				await message.edit("Error: no path supplied.")
+				await message.edit(content)
+			
+			messages = []
+			async for msg in channel.history(limit=None):
+				if isinstance(msg.type, MessageType.default):
+					messages.append(f"{msg.created_at} | {msg.author.name} > {msg.content}")
+				if isinstance(msg.type, MessageType.call):
+					messages.append(f"{msg.created_at} | {msg.author.name} > User called.")
+			arguments["outdata"] = messages
+			write_data(**arguments)
+			
+if __name__ == "__main__":
+	try:
+		cbot.run(token, bot=False)
+	except Exception as Err:
+		print("Error: " + str(Err))
+		exit(1)
