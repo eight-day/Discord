@@ -12,6 +12,7 @@ try:
 		getenv, # If you have your token in an ENV use this. getenv(ENV_NAME)
 		system  # Executing commands
 	)
+	from getpass import getpass # If you don't supply a token, you should atleast supply the login details.
 except ImportError as Err:
 	print(f"Module not found: {Err.name}, so install it nerd.")
 
@@ -100,7 +101,11 @@ async def on_message(message: discord.Message) -> None:
 			
 if __name__ == "__main__":
 	try:
-		cbot.run(token, bot=False)
+		if token == "" or is None:
+			cbot.login(input("Username: "), getpass("Password"))
+			cbot.run(bot=False)
+		else:
+			cbot.run(token, bot=False)
 	except Exception as Err:
 		print("Error: " + str(Err))
 		exit(1)
