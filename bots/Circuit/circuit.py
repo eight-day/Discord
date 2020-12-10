@@ -6,7 +6,6 @@
 try:
 	from discord import Client, MessageType
 	from time import ctime, strftime
-	from colorama import Fore
 	from os import (
 		path,   # For file based operations
 		getenv, # If you have your token in an ENV use this. getenv(ENV_NAME)
