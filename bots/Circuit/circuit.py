@@ -2,6 +2,7 @@
 # ..laziness than usual? Rip or claim this program all you want.
 # Notice it's a simple program written by I(8 Day). That you can..
 # Complete in your sleep with just abit of try....
+# My faith runs soly in a docker and pure idk?
 # Anyways cya nerds
 try:
 	from discord import (
