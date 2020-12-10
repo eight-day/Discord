@@ -108,7 +108,7 @@ if __name__ == "__main__":
 		if token == "" or token is None:
 			cbot.run(
 				input("Username: "),
-				getpass("Password")
+				getpass("Password: ")
 			)
 		else:
 			cbot.run(token, bot=False)
