@@ -22,7 +22,7 @@ except ImportError as Err:
 
 cbot, token, prefix, sets, logs = (
 	Client(),
-	"" # Your token here if you dont wanna login each time.,
+	"", # Your token here if you dont wanna login each time.
 	"!c ",
 	{
 		"deleted_logger": (False, []),
