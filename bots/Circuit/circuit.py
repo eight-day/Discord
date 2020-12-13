@@ -13,7 +13,8 @@ try:
 	from os import (
 		path,   # For file based operations
 		getenv, # If you have your token in an ENV use this. getenv(ENV_NAME)
-		system  # Executing commands
+		system, # Executing commands
+		_exit   # Closing the program and all of its children
 	)
 	from time import ctime, strftime
 	from getpass import getpass # If you don't supply a token, you should atleast supply the login details.
@@ -61,6 +62,10 @@ async def on_message(message: Message) -> None:
 		message.attachments
 	)
 	def check(message: Message) -> bool:
+		"""
+		Do not use nonlocal unless you know it will not interfere.
+		Using nonlocal with the below will cause errors and false positives.
+		"""
 		return message.author == cbot.user if not sets["others"] else (
 			message.author in sets["allow_others"][1]
 		)
@@ -102,6 +107,12 @@ async def on_message(message: Message) -> None:
 					messages.append(f"{msg.created_at} | {msg.author.name} > User called.")
 			arguments["outdata"] = messages
 			write_data(**arguments)
+		if command == "break":
+			if "nosave" in args:
+				await channel.send("[+] Closed and didn't save.")
+				_exit()
+			await channel.send("[+] Closed and saved.")
+			_exit()
 			
 if __name__ == "__main__":
 	try:
