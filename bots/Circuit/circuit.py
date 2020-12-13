@@ -113,7 +113,7 @@ async def on_message(message: Message) -> None:
 				_exit()
 			await channel.send("[+] Closed and saved.")
 			_exit()
-			
+
 if __name__ == "__main__":
 	try:
 		if token == "" or token is None:
