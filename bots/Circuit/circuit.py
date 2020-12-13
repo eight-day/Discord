@@ -19,7 +19,8 @@ try:
 	from time import ctime, strftime
 	from getpass import getpass # If you don't supply a token, you should atleast supply the login details.
 except ImportError as Err:
-	print(f"Module not found: {Err.name}, so install it nerd.")
+	print(f"Module not found: {Err.name} | Install it and re-run.")
+	exit()
 
 cbot, token, prefix, sets, logs = (
 	Client(),
