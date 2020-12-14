@@ -9,7 +9,8 @@ try:
 	from discord import (
 		Client, 
 		MessageType,
-		Message
+		Message,
+		DMChannel
 	)
 	from os import (
 		path,   # For file based operations
@@ -63,6 +64,9 @@ async def on_message(message: Message) -> None:
 		message.embeds,
 		message.attachments
 	)
+	channame = channel.name
+	if channel.type == DMChannel:
+		channame = f"DMs-{channel.recipient.name}"
 	def check(message: Message, is_self=False) -> bool:
 		"""
 		Do not use nonlocal unless you know it will not interfere.
@@ -92,7 +96,7 @@ async def on_message(message: Message) -> None:
 					"overwrite": "--overwrite" in args or "-a" in args,
 					"append": "--append" in args or "-a" in args,
 					"outpath": (
-						(f"{channel}-{ctime()}.log") if "-o" not in args else (
+						(f"{channame}-{ctime()}.log") if "-o" not in args else (
 							args[args.index("-o") + 1])
 					),
 					"outdata": [] # Uses writelines
