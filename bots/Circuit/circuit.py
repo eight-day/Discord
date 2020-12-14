@@ -105,7 +105,7 @@ async def on_message(message: Message) -> None:
 						)
 					if msg.type == MessageType.call:
 						arguments["outdata"].append(
-							f"[{msg.created_at}::{msg.ended_timestamp}] {msg.author} - Called.\n"
+							f"[{msg.created_at}::{msg.call.ended_timestamp}] {msg.author} - Called.\n"
 						)
 				Thread(target=write_data, kwargs=arguments).start() # Use a thread so we dont interrupt the eLoop
 
@@ -119,7 +119,7 @@ async def on_message(message: Message) -> None:
 					)
 				if msg.type == MessageType.call:
 					arguments["outdata"].append(
-						f"[{msg.created_at}::{msg.ended_timestamp}] {msg.author} - Called.\n"
+						f"[{msg.call.created_at}::{msg.ended_timestamp}] {msg.author} - Called.\n"
 					)
 			write_data(**arguments)
 		if command == "break":
