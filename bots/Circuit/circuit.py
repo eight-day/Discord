@@ -118,10 +118,8 @@ async def on_message(message: Message) -> None:
 if __name__ == "__main__":
 	try:
 		if token == "" or token is None:
-			cbot.run(
-				input("Username: "),
-				getpass("Password: ")
-			)
+			print("[!] No token supplied.")
+			_exit(1)
 		else:
 			cbot.run(token, bot=False)
 	except Exception as Err:
