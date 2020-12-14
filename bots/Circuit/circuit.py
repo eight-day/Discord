@@ -99,11 +99,11 @@ async def on_message(message: Message) -> None:
 				}
 				await message.delete()
 				async for msg in channel.history(limit=None):
-					if isinstance(msg, MessageType.default):
+					if isinstance(type(msg), MessageType.default):
 						arguments["outdata"].append(
 							f"[{msg.creation_date}] {msg.author} - {msg.content}"
 						)
-					if isinstance(msg, MessageType.call):
+					if isinstance(type(msg), MessageType.call):
 						arguments["outdata"].append(
 							f"[{msg.creation_data}] {msg.author} - Called."
 						)
