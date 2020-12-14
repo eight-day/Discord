@@ -10,6 +10,7 @@
 
 # Side notes for developers.
 Do not forget to update check to your need.
+
 Be careful of what you allow others to execute...
 Example:
 - [x] Good:
@@ -44,4 +45,5 @@ If you need to contact me about the following:
 
 Feel free to message me on
 [Instagram](https://instagram.com/notdoxxed)
+
 Discord: 8 Day#0001
