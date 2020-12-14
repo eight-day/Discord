@@ -115,11 +115,11 @@ async def on_message(message: Message) -> None:
 			async for msg in channel.history(limit=None):
 				if msg.type == MessageType.default:
 					arguments["outdata"].append(
-						f"[{msg.creation_date}] {msg.author} - {msg.content}\n"
+						f"[{msg.created_at}] {msg.author} - {msg.content}\n"
 					)
 				if msg.type == MessageType.call:
 					arguments["outdata"].append(
-						f"[{msg.creation_data}] {msg.author} - Called.\n"
+						f"[{msg.created_at}] {msg.author} - Called.\n"
 					)
 			write_data(**arguments)
 		if command == "break":
