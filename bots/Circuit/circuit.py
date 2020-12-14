@@ -14,24 +14,23 @@ try:
 		path,   # For file based operations
 		getenv, # If you have your token in an ENV use this. getenv(ENV_NAME)
 		system, # Executing commands
-		_exit   # Closing the program and all of its children
+		_exit   # https://man7.org/linux/man-pages/man2/_exit.2.html
 	)
 	from time import ctime, strftime
-	from getpass import getpass # If you don't supply a token, you should atleast supply the login details.
 except ImportError as Err:
 	print(f"Module not found: {Err.name} | Install it and re-run.")
 	exit()
 
 cbot, token, prefix, sets, logs = (
-	Client(),
-	"", # Your token here if you dont wanna login each time.
-	"!c ",
-	{
-		"deleted_logger": (False, []),
-		"save_attachments": (False, []), # Not rec for accounts in many servers uwu.
+	Client(),				# discord.Client object init.
+	"", 					# Token
+	"!c ",					# Prefix
+	{					# Settings
+		"deleted_logger": (False, []),  
+		"save_attachments": (False, []),# Not rec for accounts in many servers uwu.
 		"allow_others": (False, [])
 	},
-	{
+	{					# Logs
 		"deleted_messages": [],
 		"executed_commands":[],
 		"failed_commands":  [],
@@ -71,19 +70,20 @@ async def on_message(message: Message) -> None:
 			return True
 		return message.author == cbot.user
 	
-	if content.startswith(prefix):
-		if not check(message):
-			return
-		# Yes, I could've one lined the above, but it looked bad.
+	if content.startswith(prefix) and check(message):
+		# Here is where you need to focus if you plan to add anything.
+		# Be aware of what you allow others to do.
 		command, *args = content.strip(prefix).split()
 		if command == "purge":
+			if message.author != cbot.user:
+				return
 			limit = int(args[0]) if len(args) >= 1 and args[0].isdigit() else None
 			async for msg in channel.history(limit=limit):
 				if check(msg):
 					try: await msg.delete()
 					except: continue
 			await message.delete()
-		if command == "logs":
+		if command == "log":
 			try:
 				arguments = {
 					"overwrite": "--overwrite" in args or "-a" in args,
