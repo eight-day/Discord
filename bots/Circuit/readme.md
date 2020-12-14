@@ -43,5 +43,4 @@ If you need to contact me about the following:
 1. CO-development
 
 Feel free to message me on:
-[Instagram](https://instagram.com/notdoxxed)
-[Discord](8 Day#0001)
+[Instagram](https://instagram.com/notdoxxed) or Discord: 8 Day#0001
