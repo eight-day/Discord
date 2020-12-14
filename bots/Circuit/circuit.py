@@ -61,11 +61,13 @@ async def on_message(message: Message) -> None:
 		message.embeds,
 		message.attachments
 	)
-	def check(message: Message) -> bool:
+	def check(message: Message, is_self=False) -> bool:
 		"""
 		Do not use nonlocal unless you know it will not interfere.
 		Using nonlocal with the below will cause errors and false positives.
 		"""
+		if is_self:
+			message.author == cbot.user
 		if sets["allow_others"] and message.author in sets["allow_others"][1]:
 			return True
 		return message.author == cbot.user
