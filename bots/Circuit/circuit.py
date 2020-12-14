@@ -3,6 +3,7 @@
 # Notice it's a simple program written by I(8 Day). That you can..
 # Complete in your sleep with just abit of try....
 # My faith runs soly in a docker and pure idk?
+# I'm not adding any YAYA features to this as its just a simple bot.
 # Anyways cya nerds
 try:
 	from discord import (
@@ -17,6 +18,7 @@ try:
 		_exit   # https://man7.org/linux/man-pages/man2/_exit.2.html
 	)
 	from time import ctime, strftime
+	from threading import Thread
 except ImportError as Err:
 	print(f"Module not found: {Err.name} | Install it and re-run.")
 	exit()
@@ -84,7 +86,6 @@ async def on_message(message: Message) -> None:
 				if check(msg):
 					try: await msg.delete()
 					except: continue
-			await message.delete()
 		if command == "log":
 			try:
 				arguments = {
@@ -97,6 +98,17 @@ async def on_message(message: Message) -> None:
 					"outdata": [] # Uses writelines
 				}
 				await message.delete()
+				async for msg in channel.history(limit=None):
+					if isinstance(msg, MessageType.default):
+						arguments["outdata"].append(
+							f"[{msg.creation_date}] {msg.author} - {msg.content}"
+						)
+					if isinstance(msg, MessageType.call):
+						arguments["outdata"].append(
+							f"[{msg.creation_data}] {msg.author} - Called."
+						)
+				Thread(target=write_data, kwargs=arguments).start() # Use a thread so we dont interrupt the eLoop
+
 			except IndexError:
 				await message.edit("Error: no path supplied.")
 				await message.edit(content)
@@ -115,6 +127,15 @@ async def on_message(message: Message) -> None:
 				_exit()
 			await channel.send("[+] Closed and saved.")
 			_exit()
+		if command == "set" and len(args) == 2:
+			if args[0] in sets and args[1].lower() in ("true", "false"):
+				sets[args[0]][0] = True if args[1].lower() == "true" else False
+				await message.edit(content=f'Option: {args[0]} set to {str(sets[args[0]][0])}.')
+			else:
+				if args[0] not in sets:
+					await message.edit(content=f"{args[0]} Does not exist.")
+				else:
+					await message.edit(content=f"Invalid setting for {args[0]}.")
 
 if __name__ == "__main__":
 	try:
