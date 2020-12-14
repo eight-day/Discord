@@ -64,11 +64,8 @@ async def on_message(message: Message) -> None:
 		message.embeds,
 		message.attachments
 	)
-	if channel.type != DMChannel:
-		channame = channel.name
-	else:
-		channame = f"DMs-{channel.recipient.name}"
-		
+	if hasattr(channel, "recipient"): channame = f"DMs-{channel.recipient.name}"
+	if hasattr(channel, "name"): channame = channel.name
 	def check(message: Message, is_self=False) -> bool:
 		"""
 		Do not use nonlocal unless you know it will not interfere.
