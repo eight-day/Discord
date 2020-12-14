@@ -117,9 +117,10 @@ async def on_message(message: Message) -> None:
 				await message.edit(content=content)
 			async for msg in channel.history(limit=None):
 				if msg.type == MessageType.default:
-					arguments["outdata"].append(
-						f"[{msg.created_at}] {msg.author} - {msg.content}\n"
-					)
+					if msg.content != "" and msg.content != None:
+						arguments["outdata"].append(
+							f"[{msg.created_at}] {msg.author} - {msg.content}\n"
+						)
 				if msg.type == MessageType.call:
 					arguments["outdata"].append(
 						f"[{msg.created_at}::{msg.call.ended_timestamp}] {msg.author} - Called.\n"
