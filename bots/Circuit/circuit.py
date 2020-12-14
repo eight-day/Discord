@@ -64,9 +64,8 @@ async def on_message(message: Message) -> None:
 		message.embeds,
 		message.attachments
 	)
-	channame = channel.name
-	if channel.type == DMChannel:
-		channame = f"DMs-{channel.recipient.name}"
+	
+	channame = channel.name if channel.type != DMChannel else f"DMs-{channel.recipient.name}"
 	def check(message: Message, is_self=False) -> bool:
 		"""
 		Do not use nonlocal unless you know it will not interfere.
@@ -114,8 +113,8 @@ async def on_message(message: Message) -> None:
 				Thread(target=write_data, kwargs=arguments).start() # Use a thread so we dont interrupt the eLoop
 
 			except IndexError:
-				await message.edit("Error: no path supplied.")
-				await message.edit(content)
+				await message.edit(content="Error: no path supplied.")
+				await message.edit(content=content)
 			async for msg in channel.history(limit=None):
 				if msg.type == MessageType.default:
 					arguments["outdata"].append(
