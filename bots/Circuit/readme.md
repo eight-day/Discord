@@ -42,5 +42,5 @@ If you need to contact me about the following:
 1. A better way to do something.
 1. CO-development
 
-Feel free to message me on:
+Feel free to message me on
 [Instagram](https://instagram.com/notdoxxed) or Discord: 8 Day#0001
