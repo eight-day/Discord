@@ -99,11 +99,11 @@ async def on_message(message: Message) -> None:
 				}
 				await message.delete()
 				async for msg in channel.history(limit=None):
-					if isinstance(msg.type, MessageType.default):
+					if isinstance(type(msg.type), type(MessageType.default)):
 						arguments["outdata"].append(
 							f"[{msg.creation_date}] {msg.author} - {msg.content}\n"
 						)
-					if isinstance(msg.type, MessageType.call):
+					if isinstance(type(msg.type), type(MessageType.call)):
 						arguments["outdata"].append(
 							f"[{msg.creation_data}] {msg.author} - Called.\n"
 						)
@@ -113,11 +113,11 @@ async def on_message(message: Message) -> None:
 				await message.edit("Error: no path supplied.")
 				await message.edit(content)
 			async for msg in channel.history(limit=None):
-				if isinstance(msg.type, MessageType.default):
+				if isinstance(type(msg.type), type(MessageType.default)):
 					arguments["outdata"].append(
 						f"[{msg.creation_date}] {msg.author} - {msg.content}\n"
 					)
-				if isinstance(msg.type, MessageType.call):
+				if isinstance(type(msg.type), type(MessageType.default)):
 					arguments["outdata"].append(
 						f"[{msg.creation_data}] {msg.author} - Called.\n"
 					)
