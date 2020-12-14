@@ -36,10 +36,10 @@ if command == "purge" and check(message):
 
 # Other
 If you need to contact me about the following:
-	1. Adding things to the bot.
-	1. An error that has not been fixed.
-	1. A better way to do something.
-	1. CO-development
+1. Adding things to the bot.
+1. An error that has not been fixed.
+1. A better way to do something.
+1. CO-development
 Feel free to message me on:
-	[Instagram] @notdoxxed
-	[Discord] 8 Day#0001
+[Instagram] @notdoxxed
+[Discord] 8 Day#0001
