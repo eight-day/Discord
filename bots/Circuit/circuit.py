@@ -67,7 +67,7 @@ async def on_message(message: Message) -> None:
 		Do not use nonlocal unless you know it will not interfere.
 		Using nonlocal with the below will cause errors and false positives.
 		"""
-		if sets["others"] and message.author in sets["allow_others"][1]:
+		if sets["allow_others"] and message.author in sets["allow_others"][1]:
 			return True
 		return message.author == cbot.user
 	
@@ -77,7 +77,7 @@ async def on_message(message: Message) -> None:
 		# Yes, I could've one lined the above, but it looked bad.
 		command, *args = content.strip(prefix).split()
 		if command == "purge":
-			limit = int(args[0]) if args.__len__ >= 1 and args[0].isdigit() else None
+			limit = int(args[0]) if len(args) >= 1 and args[0].isdigit() else None
 			async for msg in channel.history(limit=limit):
 				if check(msg):
 					try: await msg.delete()
