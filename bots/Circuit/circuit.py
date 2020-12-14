@@ -67,14 +67,13 @@ async def on_message(message: Message) -> None:
 		Do not use nonlocal unless you know it will not interfere.
 		Using nonlocal with the below will cause errors and false positives.
 		"""
-		return message.author == cbot.user if not sets["others"] else (
-			message.author in sets["allow_others"][1]
-		)
+		if sets["others"] and message.author in sets["allow_others"][1]:
+			return True
+		return message.author == cbot.user
 	
 	if content.startswith(prefix):
-		if ( not sets["allow_others"] and not check(message) ): return
-		if author not in sets["allow_others"][1]: return
-		
+		if not check(message):
+			return
 		# Yes, I could've one lined the above, but it looked bad.
 		command, *args = content.strip(prefix).split()
 		if command == "purge":
