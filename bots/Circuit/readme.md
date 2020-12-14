@@ -4,7 +4,7 @@
 * Error - Messy exception when !c purge is triggered [__Pending__]
 
 # Tasks/Future updates.
-- [ ] Check logging for any errors and fix them.
+- [x] Check logging for any errors and fix them.
 - [ ] Add in the ability to save logging to out.
 - [ ] Make the break command fully functional.
 
