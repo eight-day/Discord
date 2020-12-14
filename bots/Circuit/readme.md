@@ -14,21 +14,21 @@ Be careful of what you allow others to execute...
 Example:
 - [x] Good:
 ```python
-  if command == "purge" and check(message, True):
-    async for msg in channel.history(limit=limit):
-      try:
-        if check(msg, True):
-          await msg.delete()
-      except:
-        continue
+if command == "purge" and check(message, True):
+	async for msg in channel.history(limit=limit):
+		try:
+			if check(msg, True):
+				await msg.delete()
+		except:
+			continue
 ```
 - [ ] Bad:
 ```python
-  if command == "purge" and check(message):
-    async for msg in channel.history(limit=limit):
-      try:
-        if check(msg):
-          await msg.delete()
-      except:
-        continue
+if command == "purge" and check(message):
+	async for msg in channel.history(limit=limit):
+		try:
+			if check(msg):
+				await msg.delete()
+			except:
+				continue
 ```
