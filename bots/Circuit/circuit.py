@@ -99,27 +99,28 @@ async def on_message(message: Message) -> None:
 				}
 				await message.delete()
 				async for msg in channel.history(limit=None):
-					if isinstance(type(msg), type(MessageType.default)):
+					if isinstance(msg.type, MessageType.default):
 						arguments["outdata"].append(
-							f"[{msg.creation_date}] {msg.author} - {msg.content}"
+							f"[{msg.creation_date}] {msg.author} - {msg.content}\n"
 						)
-					if isinstance(type(msg), type(MessageType.call)):
+					if isinstance(msg.type, MessageType.call):
 						arguments["outdata"].append(
-							f"[{msg.creation_data}] {msg.author} - Called."
+							f"[{msg.creation_data}] {msg.author} - Called.\n"
 						)
 				Thread(target=write_data, kwargs=arguments).start() # Use a thread so we dont interrupt the eLoop
 
 			except IndexError:
 				await message.edit("Error: no path supplied.")
 				await message.edit(content)
-			
-			messages = []
 			async for msg in channel.history(limit=None):
 				if isinstance(msg.type, MessageType.default):
-					messages.append(f"{msg.created_at} | {msg.author.name} > {msg.content}")
+					arguments["outdata"].append(
+						f"[{msg.creation_date}] {msg.author} - {msg.content}\n"
+					)
 				if isinstance(msg.type, MessageType.call):
-					messages.append(f"{msg.created_at} | {msg.author.name} > User called.")
-			arguments["outdata"] = messages
+					arguments["outdata"].append(
+						f"[{msg.creation_data}] {msg.author} - Called.\n"
+					)
 			write_data(**arguments)
 		if command == "break":
 			if "nosave" in args:
