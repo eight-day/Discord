@@ -1,7 +1,7 @@
 # Known Errors
-* Error 0 - _Check nested function_ not running due to invalid key [__Fixed__]
-* Error 1 - Invalid arguments in the cbot.run without token [__Fixed__]
-* Error 2 - Messy exception when !c purge is triggered [__Pending__]
+* Error - _Check nested function_ not running due to invalid key [__Fixed__]
+* Error - Invalid arguments in the cbot.run without token [__Fixed__]
+* Error - Messy exception when !c purge is triggered [__Pending__]
 
 # Tasks/Future updates.
 - [ ] Check logging for any errors and fix them.
@@ -43,4 +43,5 @@ If you need to contact me about the following:
 1. CO-development
 
 Feel free to message me on
-[Instagram](https://instagram.com/notdoxxed) or Discord: 8 Day#0001
+[Instagram](https://instagram.com/notdoxxed)
+Discord: 8 Day#0001
