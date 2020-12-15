@@ -127,11 +127,12 @@ async def on_message(message: Message) -> None:
 					)
 			write_data(**arguments)
 		if command == "break":
-			if "nosave" in args:
-				await channel.send("[+] Closed and didn't save.")
-				_exit()
-			await channel.send("[+] Closed and saved.")
-			_exit()
+			await message.delete()
+			if "-ns" in args:
+				await channel.send("[+] Closed and didn't save.", delete_after=5)
+				_exit(0)
+			await channel.send("[+] Closed and saved.", delete_after=5)
+			_exit(0)
 		if command == "set" and len(args) == 2:
 			if args[0] in sets and args[1].lower() in ("true", "false"):
 				sets[args[0]][0] = True if args[1].lower() == "true" else False
