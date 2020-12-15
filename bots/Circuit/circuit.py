@@ -141,6 +141,15 @@ async def on_message(message: Message) -> None:
 					await message.edit(content=f"{args[0]} Does not exist.")
 				else:
 					await message.edit(content=f"Invalid setting for {args[0]}.")
+					
+@cbot.event
+async def on_message_delete(msg: discord.Message) -> None:
+	"""
+	This is triggered automatically, but if false, it wont do anything.
+	!c set deleted_logger true <- should enable it.
+	"""
+	# I'm kinda drunk on energy drinks ngl LAWL
+	return
 
 if __name__ == "__main__":
 	try:
