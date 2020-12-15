@@ -1,7 +1,7 @@
 # Known Errors
 * Error - _Check nested function_ not running due to invalid key [__Fixed__]
 * Error - Invalid arguments in the cbot.run without token [__Fixed__]
-* Error - Messy exception when !c purge is triggered [__Pending__]
+* Error - Messy exception when !c purge is triggered [__Fixed__]
 
 # Tasks/Future updates.
 - [x] Check logging for any errors and fix them.
