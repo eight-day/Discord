@@ -47,6 +47,8 @@ The following is nothing but things I plan to add on when I have the time.
 1. Forking get-token and having it ran when no token is supplied automatically.
 2.  ^ Branch of -> Allowing the token to be passed via argv
 3.  Fancying up the log command and saving images to a directory(wno: user/chan logged in)
+4.  Oh yeah, and I'm going to clean all of this up. I wrote this swiftly and used bad practices(That still work)
+5.  I'll be doing this when I get the chance to do so.
 
 
 # Other
