@@ -36,6 +36,18 @@ if command == "purge" and check(message):
 ```
 
 
+
+# Plans
+The following is nothing but things I plan to add on when I have the time.
+1. Adding alias support.
+1. Allowing the ability to change the prefix.
+1. Adding more commands.
+1. Getting the set properties to actually interact with the bot.
+1. Getting other events in here and attached to the bot for whatever purpose.
+1. Forking get-token and having it ran when no token is supplied automatically.
+2.  ^ Branch of -> Allowing the token to be passed via argv
+
+
 # Other
 If you need to contact me about the following:
 
