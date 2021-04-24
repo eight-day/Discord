@@ -46,6 +46,7 @@ The following is nothing but things I plan to add on when I have the time.
 1. Getting other events in here and attached to the bot for whatever purpose.
 1. Forking get-token and having it ran when no token is supplied automatically.
 2.  ^ Branch of -> Allowing the token to be passed via argv
+3.  Fancying up the log command and saving images to a directory(wno: user/chan logged in)
 
 
 # Other
