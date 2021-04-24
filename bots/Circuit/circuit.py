@@ -15,6 +15,7 @@ try:
 		system, # Executing commands
 		_exit   # https://man7.org/linux/man-pages/man2/_exit.2.html
 	)
+	from sys import argv # Same as: int main(int argc; char *argv[]){ const char *var = argv[index_of_needed_argument]; }
 	from time import ctime, strftime
 	from threading import Thread
 except ImportError as Err:
