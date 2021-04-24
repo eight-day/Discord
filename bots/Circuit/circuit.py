@@ -27,7 +27,7 @@ except ImportError as Err:
 cbot, token, prefix, sets, logs = (
 	Client(),				# discord.Client object init.
 	"", 					# Token
-	"!c ",					# Prefix
+	"ct ",					# Prefix
 	{					# Settings
 		"deleted_logger": (False, []),  
 		"save_attachments": (False, []),# Not rec for accounts in many servers uwu.
